@@ -1,3 +1,4 @@
+import "../css/MovieCard.css";
 export default function MovieCard({ movie }) {
 	function onFavoriteClick() {
 		alert("Favorite button was clicked");
