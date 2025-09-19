@@ -4,13 +4,24 @@ import { useState, useEffect } from "react";
 import { searchMovies, getPopularMovies } from "../services/api";
 export default function Home() {
 	const [searchQuery, setSearchQuery] = useState("");
+	const [movies, setMovies] = useState([]);
+	const [error, setError] = useState(null);
+	const [loading, setloading] = useState(true);
 
-	const movies = [
-		{ id: 1, title: "John Wick", release_date: "2022" },
-		{ id: 2, title: "Avengers 1", release_date: "2012" },
-		{ id: 3, title: "Avengers 2", release_date: "2015" },
-		{ id: 4, title: "Avengers 3", release_date: "2018" },
-	];
+	useEffect(() => {
+		const loadPopularMovies = async () => {
+			try {
+				const popularMovies = await getPopularMovies();
+				setMovies(popularMovies);
+			} catch (err) {
+				setError("Failed to load movies...");
+				console.log(err);
+			} finally {
+				setloading(false);
+			}
+		};
+		loadPopularMovies();
+	}, []);
 
 	const handleSearch = (e) => {
 		e.preventDefault();
