@@ -22,7 +22,7 @@ export const MovieProvider = ({ children }) => {
 		setFavorites((prev) => [...prev, movie]); //Gets all the previously liked movies and then adds the new movie
 	};
 
-	const removeFromFavorite = (movieId) => {
+	const removeFromFavorites = (movieId) => {
 		setFavorites((prev) => prev.filter((movie) => movie.id !== movieId));
 	};
 
@@ -33,7 +33,7 @@ export const MovieProvider = ({ children }) => {
 	const value = {
 		favorites,
 		addToFavorites,
-		removeFromFavorite,
+		removeFromFavorites,
 		isFavorite,
 	};
 	return (
